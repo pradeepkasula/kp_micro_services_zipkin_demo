@@ -21,3 +21,15 @@ Zipkin
 We use Zipkin in two parts : Zipkin Client and Zipkin Server. Zipkin Client contains Sampler which collects data from microservices with the help of Sleuth and provides it to the Zipkin Server. In order to utilize the benefits of both tools, we should always add Zipkin Client’s dependency along with Sleuth in every microservice.
 
 However, there must be only one centralized Zipkin Server, which collects all data from Zipkin Client and display it as a UI. Hence, after making a request developer should look into Zipkin Server to find trace id, span id and even flow of execution. From here itself, Open Log files to check Log lines that are related to the current trace Id.
+
+
+# get the latest source
+git clone https://github.com/openzipkin/zipkin
+cd zipkin
+# Build the server and also make its dependencies
+./mvnw -T1C -q --batch-mode -DskipTests --also-make -pl zipkin-server clean package
+# Run the server
+java -jar ./zipkin-server/target/zipkin-server-*exec.jar
+# or Run the slim server
+java -jar ./zipkin-server/target/zipkin-server-*slim.jar
+
